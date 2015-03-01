@@ -1,7 +1,9 @@
 package edu.main;
 
+import form.MainForm;
 import integrators.RungeKutt;
 import matrix.Matrix;
+import matrix.operations.Sub2;
 import model.AbstractModel;
 import optimisation.Function;
 import optimisation.GoldenSearch;
@@ -23,8 +25,47 @@ public class Simulator {
         return myModel;
     }
 
+    public void calc2(){
+        MainForm mainForm = new MainForm();
+        Matrix endPsi = new Matrix(new double[][]{
+                {0},{0},{10},{10},{0},{0},{0},{0},{0},{1},{0}
+        });
+        Matrix init = new Matrix(new double[][]{
+                {0},   //x
+                {1800},//y
+                {0},   //Vx
+                {0},   //Vy
+                {500}, //m
+                {0},   //psi1
+                {0},   //psi2
+                {0},   //psi3
+                {0},   //psi4
+                {0},   //psi5
+                {0}    //teta
+        });
+        GrinkoModel model = new GrinkoModel(init,1);
+        new RungeKutt(model,0,288,1).integrate();
+        Matrix delta = Sub2.calc(model.getLast(),endPsi);
+        mainForm.addGraphic("X",MainForm.drawChartT("X",model.getX(),0,1));
+        mainForm.addGraphic("Y",MainForm.drawChartT("Y",model.getX(),1,1));
+        mainForm.addGraphic("Vx",MainForm.drawChartT("Vx",model.getX(),2,1));
+        mainForm.addGraphic("Vy",MainForm.drawChartT("Vy",model.getX(),3,1));
+        mainForm.addGraphic("m",MainForm.drawChartT("m",model.getX(),4,1));
+
+        mainForm.addGraphic("psi1",MainForm.drawChartT("psi1",model.getX(),5,1));
+        mainForm.addGraphic("psi2",MainForm.drawChartT("psi2",model.getX(),6,1));
+        mainForm.addGraphic("psi3",MainForm.drawChartT("psi3",model.getX(),7,1));
+        mainForm.addGraphic("psi4",MainForm.drawChartT("psi4",model.getX(),8,1));
+        mainForm.addGraphic("psi5",MainForm.drawChartT("psi5",model.getX(),9,1));
+
+        mainForm.addGraphic("teta",MainForm.drawChartT("teta",model.getX(),10,1));
+        mainForm.setVisible(true);
+    }
+
+
     public static void main(String[] args) {
-        new Simulator().calc();
+        //new Simulator().calc();
+        new Simulator().calc2();
     }
 
     private class MyModel extends AbstractModel{
