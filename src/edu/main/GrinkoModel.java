@@ -9,7 +9,7 @@ import model.AbstractModel;
  * Time: 16:31
  */
 public class GrinkoModel extends AbstractModel {
-    public final double P = 4753;      //м^2*кг/с
+    public final double P = 4883;      //м^2*кг/с
     public final double g0 = 9.81;
     public final double rp = 6371000;
     public final double beta = 1;

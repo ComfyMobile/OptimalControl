@@ -10,6 +10,7 @@
     <orderEntry type="library" name="MathUtils" level="project" />
     <orderEntry type="library" name="jfreechart-1.0.17" level="project" />
     <orderEntry type="library" name="jcommon-1.0.21" level="project" />
+    <orderEntry type="library" name="genetic" level="project" />
   </component>
 </module>
 

@@ -32,7 +32,7 @@ public class Simulator {
         });
         Matrix init = new Matrix(new double[][]{
                 {0},   //x
-                {1800},//y
+                {1000},//y
                 {0},   //Vx
                 {0},   //Vy
                 {500}, //m
@@ -41,7 +41,7 @@ public class Simulator {
                 {0},   //psi3
                 {0},   //psi4
                 {0},   //psi5
-                {0}    //teta
+                {1}    //teta
         });
         GrinkoModel model = new GrinkoModel(init,1);
         new RungeKutt(model,0,288,1).integrate();
