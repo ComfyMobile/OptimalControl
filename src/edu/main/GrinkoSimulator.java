@@ -74,7 +74,6 @@ public class GrinkoSimulator {
                                                         1.));
         }
 
-
         Person person = initPersons.get(0);
         try {
             ControlPopulations controlPopulations = new ControlPopulations(new Population(initPersons),controlFactory);
