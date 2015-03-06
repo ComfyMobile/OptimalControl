@@ -67,12 +67,13 @@ public class GrinkoSimulator {
         new GrinkoSimulator().draw();
         ControlFactory controlFactory = new ControlFactory();
         List<Person> initPersons = new ArrayList<Person>();
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < 10; i++){
             initPersons.add(controlFactory.revivePerson(new ControlMutation(),
                                                         new ControlFitness(),
                                                         new SimpleCrossover(),
                                                         1.));
         }
+
 
         Person person = initPersons.get(0);
         try {

@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="genetic">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../JavaLessons/out/artifacts/genetic/genetic.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/genetic.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
