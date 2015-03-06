@@ -33,8 +33,8 @@ public class Simulator {
         Matrix init = new Matrix(new double[][]{
                 {0},   //x
                 {1000},//y
-                {0},   //Vx
-                {0},   //Vy
+                {10},   //Vx
+                {100},   //Vy
                 {500}, //m
                 {0},   //psi1
                 {0},   //psi2
