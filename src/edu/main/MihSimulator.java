@@ -1,6 +1,6 @@
 package edu.main;
 
-import edu.genetic.ControlPopulations;
+import edu.genetic.*;
 import form.MainForm;
 import integrators.RungeKutt;
 import matrix.Matrix;
@@ -79,7 +79,7 @@ public class MihSimulator {
         try {
             ControlPopulations controlPopulations = new ControlPopulations(new Population(initPersons),controlFactory);
             for (int i = 0; i < 5E2; i++) {
-                Person bestPerson = GeneticUtils.getBestPerson(controlPopulations.getLastPopulation());
+                Person bestPerson = edu.genetic.GeneticUtils.getBestPerson(controlPopulations.getLastPopulation());
                 if (bestPerson.getFitness() < person.getFitness()) {
                     person = bestPerson;
                 }

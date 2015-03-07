@@ -63,7 +63,7 @@ public class GrinkoSimulator {
         new GrinkoSimulator().draw();
         PersonFactory simpleFactory = new SimpleFactory();
         List<Person> initPersons = new ArrayList<Person>();
-        for (int i = 0; i < 500; i++){
+        for (int i = 0; i < 100; i++){
             initPersons.add(simpleFactory.revivePerson(new ControlMutation(),
                                                         new ControlFitness(),
                                                         new SimpleCrossover(),
@@ -74,12 +74,12 @@ public class GrinkoSimulator {
         try {
             ControlPopulations controlPopulations = new ControlPopulations(new Population(initPersons),simpleFactory);
             for (int i = 0; i < 1E5; i++) {
-                Person bestPerson = GeneticUtils.getBestPerson(controlPopulations.getLastPopulation());
+                Person bestPerson = edu.genetic.GeneticUtils.getBestPerson(controlPopulations.getLastPopulation());
                 if (bestPerson.getFitness() < person.getFitness()) {
                     person = bestPerson;
                 }
                 System.out.println("Population " + (i + 1) + ". Best person: " + bestPerson);
-                System.out.println("Fitness mean: " + GeneticUtils.getFitnessMean(controlPopulations.getLastPopulation()));
+                System.out.println("Fitness mean: " + edu.genetic.GeneticUtils.getFitnessMean(controlPopulations.getLastPopulation()));
                 controlPopulations.nextGen();
             }
         }finally {
