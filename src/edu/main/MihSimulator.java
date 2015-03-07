@@ -1,8 +1,5 @@
 package edu.main;
 
-import edu.genetic.ControlFactory;
-import edu.genetic.ControlFitness;
-import edu.genetic.ControlMutation;
 import edu.genetic.ControlPopulations;
 import form.MainForm;
 import integrators.RungeKutt;
@@ -100,7 +97,7 @@ public class MihSimulator {
         @Override
         public void mutation(Person person) {
             Random r = new Random();
-            double per = person.fitness()*0.01;
+            double per = person.getFitness()*0.01;
             Chromosome<Double> c = person.getChromosome();
             for (int i = 0; i < c.getSize(); i++){
                 if (r.nextBoolean()){

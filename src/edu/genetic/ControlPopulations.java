@@ -43,21 +43,21 @@ public class ControlPopulations extends Populations {
         //Collections.sort(persons, new PersonComparator());
         Person p1 = null;
         Person p2 = null;
-        int index = 0;
+        int index = r.nextInt(persons.size());
         while (p1 == null){
             Person person = persons.get(index);
             if (r.nextDouble() < percents.get(person)){
                 p1 = person;
             }
-            index = ++index == persons.size()? 0 : index;
+            index = r.nextInt(persons.size());
         }
-        index = 0;
+        index = r.nextInt(persons.size());
         while (p2 == null){
             Person person = persons.get(index);
             if (person != p1 && r.nextDouble() < percents.get(person)){
                 p2 = person;
             }
-            index = ++index == persons.size()? 0 : index;
+            index = r.nextInt(persons.size());
         }
         return new Pair<Person, Person>(p1,p2);
     }

@@ -1,16 +1,12 @@
 package edu.main;
 
-import edu.genetic.ControlFactory;
 import edu.genetic.ControlFitness;
 import edu.genetic.ControlMutation;
 import edu.genetic.ControlPopulations;
 import form.MainForm;
 import integrators.RungeKutt;
 import matrix.Matrix;
-import ru.javainside.genetic.system.GeneticUtils;
-import ru.javainside.genetic.system.Person;
-import ru.javainside.genetic.system.Population;
-import ru.javainside.genetic.system.SimpleCrossover;
+import ru.javainside.genetic.system.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,18 +61,18 @@ public class GrinkoSimulator {
 
     public static void main(String[] args) {
         new GrinkoSimulator().draw();
-        ControlFactory controlFactory = new ControlFactory();
+        PersonFactory simpleFactory = new SimpleFactory();
         List<Person> initPersons = new ArrayList<Person>();
-        for (int i = 0; i < 20; i++){
-            initPersons.add(controlFactory.revivePerson(new ControlMutation(),
+        for (int i = 0; i < 500; i++){
+            initPersons.add(simpleFactory.revivePerson(new ControlMutation(),
                                                         new ControlFitness(),
                                                         new SimpleCrossover(),
-                                                        1.));
+                                                        1.,1.,5,true));
         }
 
         Person person = initPersons.get(0);
         try {
-            ControlPopulations controlPopulations = new ControlPopulations(new Population(initPersons),controlFactory);
+            ControlPopulations controlPopulations = new ControlPopulations(new Population(initPersons),simpleFactory);
             for (int i = 0; i < 1E5; i++) {
                 Person bestPerson = GeneticUtils.getBestPerson(controlPopulations.getLastPopulation());
                 if (bestPerson.getFitness() < person.getFitness()) {
