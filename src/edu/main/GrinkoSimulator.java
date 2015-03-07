@@ -24,17 +24,17 @@ public class GrinkoSimulator {
 
     public List<Matrix> calc(Matrix init){
         GrinkoModel model = new GrinkoModel(init,1);
-        new RungeKutt(model,0,500,1).integrate();
+        new RungeKutt(model,0,50,1).integrate();
         return model.getX();
     }
 
     public void draw(){
         Matrix initXPsi = new Matrix(new double[][]{
-                {0},   //0 x
-                {500},//1 y
-                {0},  //2 Vx
-                {0}, //3 Vy
-                {500}, //4 m
+                {0},                   //0 x
+                {500},                 //1 y
+                {0},                   //2 Vx
+                {0},                   //3 Vy
+                {500},                 //4 m
                 {0.029689713470413312},//5 psi1
                 {-0.2134202317299473}, //6 psi2
                 {0.235492129187748},   //7 psi3

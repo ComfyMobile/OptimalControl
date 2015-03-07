@@ -17,9 +17,9 @@ public class ControlMutation implements Mutation {
     public void mutation(Person person) {
         double per;
         if (person.getFitness() < 150){
-            per = 1000.;
-        }else{
             per = 100.;
+        }else{
+            per = 20.;
         }
         Chromosome<Double> c = person.getChromosome();
         for (int i = 0; i < c.getSize(); i++){
