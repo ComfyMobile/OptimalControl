@@ -13,23 +13,15 @@ import java.util.Random;
  */
 public class ControlMutation implements Mutation {
     Random r = new Random();
+
     @Override
     public void mutation(Person person) {
-        double per;
-        if (person.getFitness() < 500) {
-            per = 1E2;
-        } else if (person.getFitness() < 100){
-            per = 5E2;
-        } else if (person.getFitness() < 10){
-            per = 1E3;
-        } else {
-            per = 20.;
-        }
+        double per = 150.;
         Chromosome<Double> c = person.getChromosome();
         for (int i = 0; i < c.getSize(); i++){
             if (r.nextBoolean()){
                 double z = r.nextBoolean()?-1.:1.;
-                c.setGene(i, c.getGene(i) + (c.getGene(i)/per)*z);
+                c.setGene(i, c.getGene(i) + r.nextDouble()*(c.getGene(i)/per)*z);
             }
         }
     }

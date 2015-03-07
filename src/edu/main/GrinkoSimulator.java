@@ -24,7 +24,7 @@ public class GrinkoSimulator {
 
     public List<Matrix> calc(Matrix init){
         GrinkoModel model = new GrinkoModel(init,1);
-        new RungeKutt(model,0,50,1).integrate();
+        new RungeKutt(model,0,40,1).integrate();
         return model.getX();
     }
 
@@ -35,11 +35,11 @@ public class GrinkoSimulator {
                 {0},                   //2 Vx
                 {0},                   //3 Vy
                 {500},                 //4 m
-                {0.029689713470413312},//5 psi1
-                {-0.2134202317299473}, //6 psi2
-                {0.235492129187748},   //7 psi3
-                {-0.1645852225066035}, //8 psi4
-                {0.04754434302302391}, //9 psi5
+                {0.013479924734145167},//5 psi1
+                {-0.1183013267131111}, //6 psi2
+                {0.10866949971956621},   //7 psi3
+                {-0.09486583389124384}, //8 psi4
+                {0.06565739809136711}, //9 psi5
                 {Double.NaN}           //10 teta
         });
 
@@ -67,7 +67,7 @@ public class GrinkoSimulator {
         new GrinkoSimulator().draw();
         ControlFactory controlFactory = new ControlFactory();
         List<Person> initPersons = new ArrayList<Person>();
-        for (int i = 0; i < 50; i++){
+        for (int i = 0; i < 100; i++){
             initPersons.add(controlFactory.revivePerson(new ControlMutation(),
                                                         new ControlFitness(),
                                                         new SimpleCrossover(),
@@ -83,7 +83,7 @@ public class GrinkoSimulator {
                     person = bestPerson;
                 }
                 System.out.println("Population " + (i + 1) + ". Best person: " + bestPerson);
-                //System.out.println("Fitness mean: " + GeneticUtils.getFitnessMean(controlPopulations.getLastPopulation()));
+                System.out.println("Fitness mean: " + GeneticUtils.getFitnessMean(controlPopulations.getLastPopulation()));
                 controlPopulations.nextGen();
             }
         }finally {
