@@ -27,11 +27,11 @@ public class ControlPopulations extends Populations {
         Population p = getLastPopulation();
         double s = 0;
         for (Person person : p.getPopulation()){
-            s += 1./person.fitness();
+            s += 1./person.getFitness();
         }
         HashMap<Person,Double> percents = new HashMap<Person,Double>();
         for (Person person : p.getPopulation()){
-            percents.put(person, (1./person.fitness())/s);
+            percents.put(person, (1./person.getFitness())/s);
         }
         return percents;
     }
