@@ -16,7 +16,7 @@ public class ControlMutation implements Mutation {
 
     @Override
     public void mutation(Person person) {
-        double per = person.getFitness()/1000.;
+        double per = person.getFitness()/1E3;
         Chromosome<Double> c = person.getChromosome();
         for (int i = 0; i < c.getSize(); i++){
             if (r.nextBoolean()){
