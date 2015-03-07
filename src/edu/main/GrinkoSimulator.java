@@ -79,7 +79,7 @@ public class GrinkoSimulator {
             ControlPopulations controlPopulations = new ControlPopulations(new Population(initPersons),controlFactory);
             for (int i = 0; i < 1E5; i++) {
                 Person bestPerson = GeneticUtils.getBestPerson(controlPopulations.getLastPopulation());
-                if (bestPerson.fitness() < person.fitness()) {
+                if (bestPerson.getFitness() < person.getFitness()) {
                     person = bestPerson;
                 }
                 System.out.println("Population " + (i + 1) + ". Best person: " + bestPerson);
