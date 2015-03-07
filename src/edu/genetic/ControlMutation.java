@@ -16,10 +16,12 @@ public class ControlMutation implements Mutation {
     @Override
     public void mutation(Person person) {
         double per;
-        if (person.getFitness() < 10){
-            per = 1000.;
-        } else if (person.getFitness() < 500){
-             per = 100.;
+        if (person.getFitness() < 500) {
+            per = 1E2;
+        } else if (person.getFitness() < 100){
+            per = 5E2;
+        } else if (person.getFitness() < 10){
+            per = 1E3;
         } else {
             per = 20.;
         }

@@ -17,7 +17,7 @@ public class ControlFactory extends PersonFactory {
     protected Person createPerson(Object... objects) {
 
         switch (objects.length){
-            case 0: return new SimplePerson();
+            case 0: return new ControlPerson(0,0);
             case 1: return new ControlPerson((Double)objects[0], (Double)objects[0]);
             case 2: return new ControlPerson((Double)objects[0], (Double)objects[1]);
             case 3: return new SimplePerson((Double)objects[0], (Double)objects[1],(Integer)objects[2]);
