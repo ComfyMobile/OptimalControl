@@ -6,6 +6,7 @@ import edu.genetic.ControlPopulations;
 import form.MainForm;
 import integrators.RungeKutt;
 import matrix.Matrix;
+import matrix.operations.Sub2;
 import ru.javainside.genetic.system.*;
 
 import java.util.ArrayList;
@@ -25,21 +26,26 @@ public class GrinkoSimulator {
     }
 
     public void draw(){
+        Matrix endXPsi = new Matrix(new double[][]{
+                {600},{0},{0},{0},{0},{0},{0},{0},{0},{1},{0}
+        });
         Matrix initXPsi = new Matrix(new double[][]{
                 {0},                   //0 x
                 {500},                 //1 y
                 {0},                   //2 Vx
                 {0},                   //3 Vy
                 {500},                 //4 m
-                {0.013479924734145167},//5 psi1
-                {-0.1183013267131111}, //6 psi2
-                {0.10866949971956621},   //7 psi3
-                {-0.09486583389124384}, //8 psi4
-                {0.06565739809136711}, //9 psi5
+                {0.02483268384954118},//5 psi1
+                {-0.2154620916108404}, //6 psi2
+                {0.20123802653598644},   //7 psi3
+                {-0.17191356051854947}, //8 psi4
+                {0.008188465524382512}, //9 psi5
                 {Double.NaN}           //10 teta
         });
 
         List<Matrix> model = calc(initXPsi);
+
+        Matrix delta = Sub2.calc(model.get(model.size() - 1), endXPsi);
 
         MainForm mainForm = new MainForm();
         mainForm.addGraphic("X",MainForm.drawChartT("X",model,0,1));
@@ -73,13 +79,13 @@ public class GrinkoSimulator {
         Person person = initPersons.get(0);
         try {
             ControlPopulations controlPopulations = new ControlPopulations(new Population(initPersons),simpleFactory);
-            for (int i = 0; i < 1E5; i++) {
-                Person bestPerson = edu.genetic.GeneticUtils.getBestPerson(controlPopulations.getLastPopulation());
+            for (int i = 0; i < 1E4; i++) {
+                Person bestPerson = GeneticUtils.getBestPerson(controlPopulations.getLastPopulation());
                 if (bestPerson.getFitness() < person.getFitness()) {
                     person = bestPerson;
                 }
                 System.out.println("Population " + (i + 1) + ". Best person: " + bestPerson);
-                System.out.println("Fitness mean: " + edu.genetic.GeneticUtils.getFitnessMean(controlPopulations.getLastPopulation()));
+                System.out.println("Fitness mean: " + GeneticUtils.getFitnessMean(controlPopulations.getLastPopulation()));
                 controlPopulations.nextGen();
             }
         }finally {
