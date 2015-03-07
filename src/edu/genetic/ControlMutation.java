@@ -25,7 +25,7 @@ public class ControlMutation implements Mutation {
         for (int i = 0; i < c.getSize(); i++){
             if (r.nextBoolean()){
                 double z = r.nextBoolean()?-1.:1.;
-                c.setGene(i, c.getGene(i) + (c.getGene(i)/100.)*z);
+                c.setGene(i, c.getGene(i) + (c.getGene(i)/per)*z);
             }
         }
     }
