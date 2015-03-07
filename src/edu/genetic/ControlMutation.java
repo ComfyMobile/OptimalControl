@@ -2,6 +2,7 @@ package edu.genetic;
 
 import ru.javainside.genetic.system.Chromosome;
 import ru.javainside.genetic.system.Mutation;
+import ru.javainside.genetic.system.Person;
 
 import java.util.Random;
 
@@ -13,8 +14,14 @@ import java.util.Random;
 public class ControlMutation implements Mutation {
     Random r = new Random();
     @Override
-    public void mutation(Chromosome chromosome) {
-        Chromosome<Double> c = chromosome;
+    public void mutation(Person person) {
+        double per;
+        if (person.getFitness() < 150){
+            per = 1000.;
+        }else{
+            per = 100.;
+        }
+        Chromosome<Double> c = person.getChromosome();
         for (int i = 0; i < c.getSize(); i++){
             if (r.nextBoolean()){
                 double z = r.nextBoolean()?-1.:1.;

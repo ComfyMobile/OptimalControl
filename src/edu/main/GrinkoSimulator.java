@@ -35,12 +35,12 @@ public class GrinkoSimulator {
                 {0},  //2 Vx
                 {0}, //3 Vy
                 {500}, //4 m
-                {0.029689713470413312},   //5 psi1
-                {-0.2134202317299473},   //6 psi2
+                {0.029689713470413312},//5 psi1
+                {-0.2134202317299473}, //6 psi2
                 {0.235492129187748},   //7 psi3
-                {-0.1645852225066035},   //8 psi4
-                {0.04754434302302391},   //9 psi5
-                {Double.NaN}    //10 teta
+                {-0.1645852225066035}, //8 psi4
+                {0.04754434302302391}, //9 psi5
+                {Double.NaN}           //10 teta
         });
 
         List<Matrix> model = calc(initXPsi);
@@ -67,7 +67,7 @@ public class GrinkoSimulator {
         new GrinkoSimulator().draw();
         ControlFactory controlFactory = new ControlFactory();
         List<Person> initPersons = new ArrayList<Person>();
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 20; i++){
             initPersons.add(controlFactory.revivePerson(new ControlMutation(),
                                                         new ControlFitness(),
                                                         new SimpleCrossover(),
