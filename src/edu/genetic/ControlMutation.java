@@ -16,24 +16,12 @@ public class ControlMutation implements Mutation {
 
     @Override
     public void mutation(Person person) {
-        double per = 20.;
-        //double per = 50.;
-        //if (person.getFitness() < 500){
-        //    per = 1E3;
-        //}else if (person.getFitness() < 400){
-        //    per = 1E4;
-        //}else if (person.getFitness() < 300){
-        //    per = 1E5;
-        //} else if (person.getFitness() < 200){
-        //    per = 1E6;
-        //} else if (person.getFitness() < 100){
-        //    per = 1E7;
-        //}
+        double per = 10.;
         Chromosome<Double> c = person.getChromosome();
         for (int i = 0; i < c.getSize(); i++){
             if (r.nextBoolean()){
                 double z = r.nextBoolean()?-1.:1.;
-                c.setGene(i, c.getGene(i) + r.nextDouble()*(c.getGene(i)/per)*z);
+                c.setGene(i, c.getGene(i) + r.nextDouble()*(c.getGene(i)*per/100.)*z);
             }
         }
     }
