@@ -68,7 +68,6 @@ public class ControlPopulations extends Populations {
         for (int i = 0; i < getLastPopulation().getPopulation().size(); i++){
             Pair<Person,Person> pair = getParents();
             Person newPerson = pair.getKey().reproduction(pair.getValue(), getFactory());
-            newPerson.mutation();
             persons.add(newPerson);
         }
         addPopulation(new Population(persons));

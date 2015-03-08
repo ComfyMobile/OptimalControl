@@ -40,8 +40,12 @@ public class ControlFitness implements FitnessFunction {
         List<Matrix> result = simulator.calc(initXPsi);
 
         Matrix delta = Sub2.calc(result.get(result.size()-1),endXPsi);
-        double d = Math.pow(delta.getData(0,0),2) + Math.pow(delta.getData(1,0),2) + Math.pow(delta.getData(2,0),2) +
-                   Math.pow(delta.getData(3,0),2) + Math.pow(delta.getData(9,0),2);
+        double x = delta.getData(0,0);
+        double y = delta.getData(1,0);
+        double Vx = delta.getData(2,0);
+        double Vy = delta.getData(3,0);
+        double psi5 = delta.getData(9,0);
+        double d = x*x + y*y + Vx*Vx + Vy*Vy + psi5*psi5;
         return d;
     }
 }
