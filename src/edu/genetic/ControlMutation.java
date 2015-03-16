@@ -13,7 +13,6 @@ import java.util.Random;
  */
 public class ControlMutation implements Mutation {
     Random r = new Random();
-
     @Override
     public void mutation(Person person) {
         double per = 10.;

@@ -10,30 +10,31 @@ import optimisation.GoldenSearch;
  */
 public class MihModel extends AbstractModel {
     public static final double RE = 6371;
-    public static final double RZ = 200 ;
+    public static final double RZ = 500 ;
     private static final double EPS = 0.01;
     private static final double G0 = 9.81*1e-3;
-    private static final double J = 788;
-    private static final double P = 31.000;
-    private static final double M0 = 600;
+    private static final double P = 24.000;
+    private static final double M0 = 60;
     public static final double V1 = 8;
-    private static double BETA = P/J;
+    private final static double BETA = 1;
 
     protected MihModel(Matrix initCondition, double step) {
         super(initCondition, step);
     }
 
     private double P(double m){
-        return m > 0 ? P : 0;
+        return P;
     }
 
     @Override
     public boolean isEnough(Object... objects) {
         Matrix X = getLast();
         double y = X.getData(1, 0);
-        double x = X.getData(0,0);
+        double x = X.getData(0, 0);
+        double vx = X.getData(2,0);
+        double vy = X.getData(3,0);
         double r = Math.sqrt(x*x+y*y)-RE;
-        return Math.abs(r - RZ )<0.1 ;
+        return Math.abs(r - RZ )< 1 && Math.abs(x*vx+y*vy) < 0.1 ;
     }
 
     @Override
@@ -68,12 +69,12 @@ public class MihModel extends AbstractModel {
                 double gx = -G0*x/RE;
                 double gy = -G0*y/RE;
                 double f = ps1*vx+ps2*vy+ps3*( P(m)/(M0+m)*Math.cos(teta)+gx)+ps4*(P(m)/(M0+m)*Math.sin(teta)+gy)-ps5*BETA;
-                return f;
+                return -f;
             }
         },X,new double[]{-Math.PI/2,Math.PI/2},EPS,10);
-        BETA = P(m)/J;
-        teta = opt[0];
-    //    teta = Math.atan2(ps3,ps4);
+
+        // teta = opt[0];
+        teta = Math.atan2(ps3,ps4);
 
         double gx = -G0*x/RE;
         double gy = -G0*y/RE;
@@ -124,10 +125,14 @@ public class MihModel extends AbstractModel {
                 double gx = -G0*x/RE;
                 double gy = -G0*y/RE;
                 double f = ps1*vx+ps2*vy+ps3*( P(m)/(M0+m)*Math.cos(teta)+gx)+ps4*(P(m)/(M0+m)*Math.sin(teta)+gy)-ps5*BETA;
-                return f;
+                return -f;
             }
         },X,new double[]{-Math.PI/2,Math.PI/2},EPS,10);
-        X.setData(10,0,opt[0]);
+        double ps3 = X.getData(7,0);
+        double ps4 = X.getData(8,0);
+        X.setData(10,0,
+                Math.atan2(ps3,ps4));
+         // opt[0]);
         super.setX(X);
     }
 }

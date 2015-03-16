@@ -48,6 +48,46 @@ public class MainForm extends JFrame{
         getContentPane().add(panel1);
     }
 
+    public static JComponent drawChartXY(String title,java.util.List<Matrix> x,int ix,java.util.List<Matrix> y,int iy,double step){
+        XYSeries series = new XYSeries("Функция");
+        for (int j = 0; j < y.size(); j++) {
+            Matrix yM = y.get(j);
+            Matrix xM = x.get(j);
+            series.add(xM.getData(ix, 0), yM.getData(iy, 0));
+        }
+        XYSeriesCollection collection = new XYSeriesCollection();
+        collection.addSeries(series);
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                title,
+                "x",
+                "y",
+                collection
+        );
+        String fontName = "Lucida Sans";
+        StandardChartTheme theme = (StandardChartTheme)org.jfree.chart.StandardChartTheme.createJFreeTheme();
+
+        theme.setTitlePaint( Color.decode( "#4572a7" ) );
+        theme.setExtraLargeFont( new Font(fontName,Font.PLAIN, 16) ); //title
+        theme.setLargeFont( new Font(fontName,Font.BOLD, 15));        //axis-title
+        theme.setRegularFont( new Font(fontName,Font.PLAIN, 11));
+        theme.setRangeGridlinePaint( Color.decode("#C0C0C0"));
+        theme.setPlotBackgroundPaint( Color.white );
+        theme.setChartBackgroundPaint( Color.white );
+        theme.setGridBandPaint( Color.red );
+        theme.setAxisOffset( new RectangleInsets(5,5,5,5) );
+        theme.setBarPainter(new StandardBarPainter());
+        theme.setAxisLabelPaint( Color.decode("#666666")  );
+        theme.apply( chart );
+        chart.removeLegend();
+
+        XYPlot plot = (XYPlot)chart.getPlot();
+        XYItemRenderer render = plot.getRenderer(0);
+        render.setSeriesStroke(0,new BasicStroke(3.0f));
+        plot.setRenderer(render);
+        ChartPanel panel = new ChartPanel(chart);
+        return panel;
+    }
+
     public static JComponent drawChartT(String key, java.util.List<Matrix> y, int i, double step) {
         XYSeries series = new XYSeries("Функция");
         for (int j = 0; j < y.size(); j++) {
